@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        
+        <record id="view_wizard_assign_form" model="ir.ui.view">
+            <field name="name">wizard.assign.form</field>
+            <field name="model">wizard.assign</field>
+            <field name="type">form</field>
+            <field name="priority" eval="8"/>
+            <field name="arch" type="xml">
+            <form string="Wizard" version="7.0">
+                <group>
+                    
+                        <field name="barcode" select="1"  domain="[('assign','!=',True)]"/>
+                    <footer>
+                    	<button string="Assign" type="object" name="code"/> 
+                    </footer>
+                </group>
+                
+            </form>
+            </field>
+        </record>
+        
+        
+        <record model="ir.actions.act_window" id="act_open_wizard_assign_view">
+            <field name="name">Wizard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">wizard.assign</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+        
+        <record model="ir.actions.act_window.view" id="act_open_wizard_assign_view_form">
+            <field name="act_window_id" ref="act_open_wizard_assign_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_wizard_assign_form"/>
+        </record>
+        
+        
+
+    </data>
+</openerp>
