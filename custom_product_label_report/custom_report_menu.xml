@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report id="product.report_product_label" string="Product Labels" model="product.product"
+            report_type="qweb-pdf" file="custom_product_label_report.product_label_report_template_id"
+            name="custom_product_label_report.product_label_report_template_id" />
+
+
+      <template id="invoice_report_layout">
+		<!-- Multicompany -->
+		<t t-if="o and 'company_id' in o">
+			<t t-set="company" t-value="o.company_id"></t>
+		</t>
+		<t t-if="not o or not 'company_id' in o">
+			<t t-set="company" t-value="res_company"></t>
+		</t>
+
+		<t t-call="custom_product_label_report.invoice_header" />
+		<t t-raw="0" />
+		<t t-call="custom_product_label_report.invoice_footer" />
+	</template>
+
+	<template id="invoice_header">
+		<div class="header">
+		</div>
+	</template>
+
+	<template id="invoice_footer">
+		<div class="footer">
+		</div>
+	</template>
+    </data>
+
+</openerp>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record id="view_product_report_label" model="ir.ui.view">
+            <field name="name">Report</field>
+            <field name="model">print.label.action.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Report" version="7.0">
+                    <group col="4">
+                        <field name="num_print"/>
+                        <field name="type_code" nolabel="1" widget="radio"/>
+                    </group>
+                    <footer>
+                        <button name="btn_clik_action" string="Print" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+		
+        <record model="ir.actions.act_window" id="act_open_action_print_label_view">
+            <field name="name">Product Labels</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">print.label.action.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+            <field name="domain">[]</field>
+            <field name="context">{}</field>
+        </record>
+
+        <record model="ir.actions.act_window.view" id="act_open_action_generate_view_form">
+            <field name="act_window_id" ref="act_open_action_print_label_view"/>
+            <field name="sequence" eval="20"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_product_report_label"/>
+        </record>
+
+		<record model="ir.values" id="payslip_lines_contribution_register_value">
+            <field name="name">Product Labels</field>
+            <field name="key2">client_print_multi</field>
+            <field name="value" eval="'ir.actions.act_window,' + str(ref('act_open_action_print_label_view'))" />
+            <field name="key">action</field>
+            <field name="model">product.product</field>
+        </record>
+		<!-- <act_window id="action_view_demo_wiz"
+            name="wizard Issue"
+            src_model="product.product"
+            res_model="print.label.action.wizard"
+            view_type="form" view_mode="form"
+            key2="client_print_multi" target="new"/> -->
+	</data>
+</openerp>

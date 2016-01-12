@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="product_label_report_template_id">
+            <t t-call="custom_product_label_report.invoice_report_layout">
+                <div class="page">
+                    <t t-foreach="docs" t-as="o">
+                        <div class="main">
+                            <t t-if="o.ean13">
+                                <t t-if="data['form']['type_code'] == 'pro_barcode'">
+                                    <t t-foreach="int(data['form']['num_print'])" t-as="i" style="width:100%;height:100%;">
+                                        <div style="width:20%;float:left;">
+                                            <table style="margin:2px;">
+                                                <tr style="margin:2px;">
+                                                    <!-- <td width="70px;" height="30px;">
+                                                        <img src="/custom_product_label_report/static/src/img/logo.png" style="width:65px;height:55px;margin-bottom:-19px;"/>
+                                                    </td> -->
+                                                    <td>
+                                                        <!-- <span t-field="company.rml_header1"></span><br /> -->
+                                                        <!-- <span t-field="o.name" style="font-size:8px;"></span><br /> -->
+                                                        <span t-field="o.default_code" style="font-size:8px;"></span>
+                                                    </td>
+                                                </tr>
+                                                </table>
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13',o.ean13, 600, 900)" style="width:100px;height:60.125984px;margin-bottom:5px;"></img>
+							<!--<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('EAN13',o.ean13, 600, 900)" style="width:144px;height:80.125984px;margin-bottom:5px;"></img>-->
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </t>
+                                </t>
+                                <t t-if="data['form']['type_code'] == 'qr_code'">
+                                    <t t-foreach="int(data['form']['num_print'])" t-as="i">
+                                        <div style="width:20%;float:left;">
+					    <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR',o.ean13, 600, 900)" style="width:100px;height:60.125984px;margin-bottom:5px;"></img>
+                                            <!--<img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('QR',o.ean13, 600, 900)" style="width:144px;height:80.125984px;margin-bottom:5px;"></img>-->
+                                        </div>
+                                    </t>
+                                </t>
+                            </t>
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </template>
+    </data>
+</openerp>
